@@ -4,16 +4,11 @@ import numpy as np
 import os
 import open_data as open_data
 from text_CNN import TextCNN
-import sys
-abs_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(abs_path + '/insight_nlp/')
-from measure import Measure
-current_path = os.path.realpath(__file__)
 
 usage = "usage: %prog [options]"
 parser = optparse.OptionParser(usage=usage)
 parser.add_option("--vocab_file", type=str,
-                  default=os.path.dirname(current_path) + '/happy_word_dict.txt',
+                  default='happy_word_dict.txt',
                   help='english vocab file')
 parser.add_option("--l2_reg_lambda", type=float, default=0.0,
                   help='L2 regularization lambda (default: 0.0)')
@@ -110,7 +105,7 @@ def main():
   # print(true_class)
   # print(scores)
   assert len(true_class) == len(classes)
-  _eval = Measure.calc_precision_recall_fvalue(true_class, classes)
+  _eval = open_data.calc_precision_recall_fvalue(true_class, classes)
   print(_eval)
 
 

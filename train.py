@@ -4,10 +4,6 @@ import numpy as np
 import os
 import open_data
 from text_CNN import TextCNN
-import sys
-abs_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(abs_path + '/insight_nlp/')
-from measure import Measure
 
 if __name__ == '__main__':
   usage = "usage: %prog [options]"
@@ -98,7 +94,7 @@ if __name__ == '__main__':
         [global_step, cnn.loss, cnn.accuracy, cnn.predictions], feed_dict)
       all_true_label = open_data.onehot_2_labels(yBatch)
       all_pred_label = predictions
-      eval_output = Measure.calc_precision_recall_fvalue(all_true_label, all_pred_label)
+      eval_output = open_data.calc_precision_recall_fvalue(all_true_label, all_pred_label)
       print(f'step {step}, loss {loss}, acc {accuracy}')
       print(eval_output)
 
