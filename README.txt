@@ -1,8 +1,6 @@
-# TextCNN
-
 TextCNN classifier model. Can be used to do both english and chinese sentence classification
 
-## For train
+# For train
 	python3 train.py \
 			--vocab_file= \
 			--train_data= \
@@ -30,7 +28,7 @@ TextCNN classifier model. Can be used to do both english and chinese sentence cl
 	--num_epochs = 40
 	--evaluate_every = 100 (evaluate model on dev every # steps)
 
-## For Predict
+# For Predict
 	python3 predict.py \
 			--vocab_file= \
 			--num_class= \
@@ -43,7 +41,7 @@ TextCNN classifier model. Can be used to do both english and chinese sentence cl
 	if args == []: predict one sentence each time
 	if args == [dataset]: predict the dataset and print the evaluate result.
 
-## For Use
+# For Use
 	from XXX/TextCNN.predict import Predictor
 	class TextCnnClassifier():
 		def __init__(self, model=XXX):
