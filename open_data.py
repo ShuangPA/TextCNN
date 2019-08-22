@@ -59,11 +59,11 @@ def open_data_and_labels(path, vocab_file, num_words, language):
     line = eval(line.strip())
     all_label.append(line['class'])
     if language == 'EN':
-      en_text = line['text']
+      en_text = line['text'].lower()
       en_text = word_filter(en_text)
       text_info = en_text.split()[:num_words]
     elif language == 'CH':
-      ch_text = line['text']
+      ch_text = line['text'].lower()
       ch_text = ch_text.replace(' ', '')
       text_info = [item for item in ch_text][:num_words]
     else:
@@ -87,7 +87,7 @@ def open_pred_data(path, vocab_file, num_words, language):
   raw_data = open(path, 'r').readlines()
   all_data = []
   for line in raw_data:
-    line = eval(line.strip())['text']
+    line = eval(line.strip())['text'].lower()
     if language == 'EN':
       en_text = word_filter(line)
       text_info = en_text.split()[:num_words]
@@ -112,7 +112,7 @@ def open_pred_data(path, vocab_file, num_words, language):
 
 def one_sentence(text, vocab_file, num_words, language):
   vocab = eval(open(vocab_file).readlines()[0])
-  line = text
+  line = text.lower()
   if language == 'EN':
     en_text = word_filter(line.strip())
     text_info = en_text.split()[:num_words]
