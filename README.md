@@ -40,6 +40,9 @@ TextCNN classifier model. Can be used to do both english and chinese sentence cl
 
 	-ckpt: the path of the model to be loaded.
 
+	Other default params:
+	--kernel_sizes = '3,4,5'
+	
 	if args == []: predict one sentence each time
 	if args == [dataset]: predict the dataset and print the evaluate result.
 
