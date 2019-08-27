@@ -28,12 +28,12 @@ parser.add_option("--gpu", default='-1')
 os.environ["CUDA_VISIBLE_DEVICES"] = options.gpu
 
 class Predictor(object):
-  def __init__(self):
+  def __init__(self, _num_words, _num_class, _vocab_file, _language):
     self._graph = tf.Graph()
     with self._graph.as_default():
       self._model = TextCNN(
-        sequenceLength = options.num_words,
-        numClasses=options.num_class,
+        sequenceLength = _num_words,
+        numClasses=_num_class,
         vocabSize=10000,
         embeddingSize=options.embedding_dim,
         kernelSizes=list(map(int, options.kernel_sizes.split(","))),
@@ -41,6 +41,10 @@ class Predictor(object):
         l2RegLambda=options.l2_reg_lambda
       )
     self._sess = tf.Session(graph=self._graph)
+    self._vocab_file = _vocab_file
+    self._num_words = _num_words
+    self._num_class = _num_class
+    self._language = _language
 
   def load_specific_model(self, model_path):
     print(f"loading model from: '{model_path}")
@@ -52,7 +56,7 @@ class Predictor(object):
 
   def predict_dataset(self, data_set):
     model = self._model
-    batch_data = open_data.open_pred_data(data_set, options.vocab_file, options.num_words, options.language)
+    batch_data = open_data.open_pred_data(data_set, self._vocab_file, self._num_words, self._language)
     score, prediction = self._sess.run(
       fetches=[
         model.w_scores,
@@ -70,7 +74,7 @@ class Predictor(object):
 
   def predict_sentence(self, sentence):
     model = self._model
-    temp = open_data.one_sentence(sentence.strip(), options.vocab_file, options.num_words, options.language)
+    temp = open_data.one_sentence(sentence.strip(), self._vocab_file, self._num_words, self._language)
     batch_data = np.array(temp)
     score, prediction = self._sess.run(
       fetches=[
@@ -87,7 +91,7 @@ class Predictor(object):
     return _classes, _score
 
 def main():
-  predictor = Predictor()
+  predictor = Predictor(options.num_words, options.num_class, options.vocab_file, options.language)
   predictor.load_specific_model(options.ckpt)
   if len(args) == 0:
     while True:
