@@ -19,7 +19,7 @@ if __name__ == '__main__':
                     help='Data source for testing.')
   parser.add_option("--embedding_dim", type=int, default=128,
                     help='Dimensionality of character embedding(default: 128)')
-  parser.add_option("--kernel_sizes", type=str, default='1,2,3,4,5',
+  parser.add_option("--kernel_sizes", type=str, default='3,4,5',
                     help='Comma-separated kernel sizes (default: 1,2,3,4,5)')
   parser.add_option("--num_kernels", type=int, default=128,
                     help='Number of filters per filter size (default: 128)')

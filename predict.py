@@ -14,7 +14,7 @@ parser.add_option("--l2_reg_lambda", type=float, default=0.0,
                   help='L2 regularization lambda (default: 0.0)')
 parser.add_option("--embedding_dim", type=int, default=128,
                   help='Dimensionality of character embedding(default: 128)')
-parser.add_option("--kernel_sizes", type=str, default='1,2,3,4,5',
+parser.add_option("--kernel_sizes", type=str, default='3,4,5',
                   help='Comma-separated kernel sizes (default: 1,2,3,4,5)')
 parser.add_option("--num_kernels", type=int, default=128,
                   help='Number of filters per filter size (default: 128)')
