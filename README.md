@@ -29,6 +29,7 @@ TextCNN classifier model. Can be used to do both english and chinese sentence cl
 	--batch_size = 32
 	--num_epochs = 40
 	--evaluate_every = 100 (evaluate model on dev every # steps)
+	--ckpt_name = 'intention'
 
 ## For Predict
 	python3 predict.py \

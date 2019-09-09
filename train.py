@@ -36,6 +36,7 @@ if __name__ == '__main__':
   parser.add_option("--evaluate_every", type=int, default=100,
                     help='Evaluate model on dev every # steps (default: 100)')
   parser.add_option("--ckpt_dir", type=str, default='./models6')
+  parser.add_option("--ckpt_name", type=str, default='intention')
 
   parser.add_option("--do_train", default=True)
   parser.add_option("--language", default='EN')
@@ -86,7 +87,7 @@ if __name__ == '__main__':
 
     def devStep(xBatch, yBatch, step):
       print(f'save model at step: {step}')
-      _saver.save(sess, f'{options.ckpt_dir}/intention', global_step=step)
+      _saver.save(sess, f'{options.ckpt_dir}/{options.ckpt_name}', global_step=step)
 
       feed_dict = {cnn.inputX: xBatch, cnn.inputY: yBatch,
                   cnn.dropout_keep_prob: 1}
